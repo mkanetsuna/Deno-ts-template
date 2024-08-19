@@ -5,7 +5,7 @@ const app = new Application();
 const router = new Router();
 
 router.get("/", (ctx) => {
-  ctx.response.body = "Hello World from Jooto Task Extractor API!";
+  ctx.response.body = "Hello Deno!";
 });
 
 router.get("/api/tasks", (ctx) => {
