@@ -1,0 +1,15 @@
+{
+    "name": "Deno Dev Container",
+    "build": {
+      "dockerfile": "Dockerfile"
+    },
+    "runArgs": ["--init"],
+    "settings": {
+      "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "extensions": [
+      "denoland.vscode-deno"
+    ],
+    "postCreateCommand": "deno --version",
+    "remoteUser": "vscode"
+}  
