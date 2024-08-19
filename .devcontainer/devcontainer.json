@@ -1,17 +1,26 @@
 {
-  "name": "Deno Container",
-  "dockerFile": "../Dockerfile",
+  "name": "Deno",
+  "image": "denoland/deno:latest",
+  "features": {
+    "ghcr.io/devcontainers/features/common-utils:2": {
+      "installZsh": "true",
+      "username": "vscode",
+      "upgradePackages": "true"
+    }
+  },
+  "postCreateCommand": "deno --version",
+  "remoteUser": "vscode",
   "customizations": {
     "vscode": {
       "extensions": [
-        "denoland.vscode-deno",
-        "ms-azuretools.vscode-docker"
+        "denoland.vscode-deno"
       ],
       "settings": {
         "deno.enable": true,
-        "deno.unstable": true
+        "deno.lint": true,
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "denoland.vscode-deno"
       }
     }
-  },
-  "postCreateCommand": "deno cache src/main.ts"
+  }
 }
