@@ -1,0 +1,38 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    name: Build and Deploy to Cloud Run
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Google Cloud SDK
+      uses: google-github-actions/setup-gcloud@v1
+      with:
+        project_id: ${{ secrets.GCP_PROJECT_ID }}
+        service_account_key: ${{ secrets.GCP_SA_KEY }}
+        export_default_credentials: true
+
+    - name: Build Docker image
+      run: |
+        docker build -t gcr.io/${{ secrets.GCP_PROJECT_ID }}/jooto-task-extract-api .
+
+    - name: Push to Google Container Registry
+      run: |
+        docker push gcr.io/${{ secrets.GCP_PROJECT_ID }}/jooto-task-extract-api
+
+    - name: Deploy to Cloud Run
+      run: |
+        gcloud run deploy jooto-task-extract-api \
+          --image gcr.io/${{ secrets.GCP_PROJECT_ID }}/jooto-task-extract-api \
+          --platform managed \
+          --region ${{ secrets.GCP_REGION }} \
+          --allow-unauthenticated
