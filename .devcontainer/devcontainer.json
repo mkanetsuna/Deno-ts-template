@@ -1,5 +1,5 @@
 {
-  "name": "Deno Template",
+  "name": "Deno Project",
   "image": "denoland/deno:latest",
   "features": {
     "ghcr.io/devcontainers/features/common-utils:2": {
@@ -8,8 +8,11 @@
       "upgradePackages": "true"
     }
   },
-  "postCreateCommand": "deno --version",
+  "postCreateCommand": "deno upgrade",
   "remoteUser": "vscode",
+  "mounts": [
+    "source=${localWorkspaceFolder}/.deno_dir,target=/home/vscode/.cache/deno,type=bind,consistency=cached"
+  ],
   "customizations": {
     "vscode": {
       "extensions": [
@@ -18,9 +21,12 @@
       "settings": {
         "deno.enable": true,
         "deno.lint": true,
-        "editor.formatOnSave": true,
-        "editor.defaultFormatter": "denoland.vscode-deno"
+        "deno.unstable": false,
+        "deno.path": "/usr/bin/deno"
       }
     }
+  },
+  "remoteEnv": {
+    "DENO_DIR": "/home/vscode/.cache/deno"
   }
 }
