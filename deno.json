@@ -1,12 +1,30 @@
 {
   "tasks": {
-    "start": "deno run --allow-net --allow-env --allow-read --allow-write src/main.ts",
-    "dev": "deno run -A --watch src/main.ts",
-    "test": "deno test --allow-net --allow-env --allow-read --allow-write",
+    "start": "deno run --allow-net --allow-env --allow-read src/main.ts",
+    "dev": "deno run --watch --allow-net --allow-env --allow-read src/main.ts",
+    "test": "deno test --allow-net --allow-env --allow-read",
     "lint": "deno lint",
     "fmt": "deno fmt"
   },
   "imports": {
     "oak": "https://deno.land/x/oak@v12.6.0/mod.ts"
+  },
+  "compilerOptions": {
+    "allowJs": true,
+    "strict": true
+  },
+  "lint": {
+    "rules": {
+      "tags": ["recommended"]
+    }
+  },
+  "fmt": {
+    "options": {
+      "useTabs": false,
+      "lineWidth": 80,
+      "indentWidth": 2,
+      "singleQuote": true,
+      "proseWrap": "preserve"
+    }
   }
 }

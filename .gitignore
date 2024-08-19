@@ -1,6 +1,7 @@
 # Deno specific
 /.deno/
 /deno.lock
+.deno_dir/
 
 # Dependencies
 /node_modules/
