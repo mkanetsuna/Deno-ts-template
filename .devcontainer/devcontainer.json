@@ -1,15 +1,17 @@
 {
-    "name": "Deno Dev Container",
-    "build": {
-      "dockerfile": "Dockerfile"
-    },
-    "runArgs": ["--init"],
-    "settings": {
-      "terminal.integrated.shell.linux": "/bin/bash"
-    },
-    "extensions": [
-      "denoland.vscode-deno"
-    ],
-    "postCreateCommand": "deno --version",
-    "remoteUser": "vscode"
-}  
+  "name": "Deno Container",
+  "dockerFile": "../Dockerfile",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "denoland.vscode-deno",
+        "ms-azuretools.vscode-docker"
+      ],
+      "settings": {
+        "deno.enable": true,
+        "deno.unstable": true
+      }
+    }
+  },
+  "postCreateCommand": "deno cache src/main.ts"
+}
